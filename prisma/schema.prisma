@@ -54,3 +54,28 @@ enum OrderStatus {
   COMPLETED
   CANCELLED
 }
+
+model MenuCategory {
+  id        String     @id @default(uuid())
+  name      String
+  order     Int        @default(0)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  items     MenuItem[]
+}
+
+model MenuItem {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  price       Int      // store in paise (₹ × 100)
+  imageUrl    String?
+  isAvailable Boolean  @default(true)
+  categoryId  String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  category    MenuCategory @relation(fields: [categoryId], references: [id])
+}
+

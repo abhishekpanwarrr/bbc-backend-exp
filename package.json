@@ -6,9 +6,9 @@
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
+    "prisma:migrate": "dotenv -e .env.prisma -- prisma migrate dev",
+    "prisma:deploy": "dotenv -e .env.prisma -- prisma migrate deploy",
     "prisma:generate": "prisma generate",
-    "prisma:migrate": "prisma migrate dev",
-    "prisma:deploy": "prisma migrate deploy",
     "lint": "eslint ."
   },
   "dependencies": {
