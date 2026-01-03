@@ -12,25 +12,22 @@ import { adminRouter } from "./api/v1/amdin/admin.routes";
 export const app = express();
 
 /**
- * ✅ CORS — SIMPLE, CORRECT, BULLETPROOF
+ * ✅ CORS — SIMPLE & CORRECT
  */
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN || "*",
+    origin: process.env.CORS_ORIGIN || "http://localhost:3000",
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
-// ✅ Handle preflight
-app.options("*", cors());
+// ❌ REMOVE THIS (causes crash)
+// app.options("*", cors());
 
-/**
- * Security & parsing AFTER CORS
- */
 app.use(helmet());
 app.use(express.json());
-app.use(morgan("dev"));
+app.use(morgan(process.env.NODE_ENV === "production" ? "combined" : "dev"));
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/menu", menuRouter);
