@@ -12,33 +12,22 @@ import { adminRouter } from "./api/v1/amdin/admin.routes";
 export const app = express();
 
 /**
- * ✅ CORS FIX (IMPORTANT)
+ * ✅ CORS — SIMPLE, CORRECT, BULLETPROOF
  */
-const allowedOrigins = [
-  process.env.CORS_ORIGIN, // http://localhost:3000
-];
-
 app.use(
   cors({
-    origin: (origin, callback) => {
-      // allow server-to-server & tools like curl/postman
-      if (!origin) return callback(null, true);
-
-      if (allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      }
-
-      return callback(new Error("Not allowed by CORS"));
-    },
-    credentials: true,
+    origin: process.env.CORS_ORIGIN || "*",
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
-// ✅ VERY IMPORTANT: handle preflight
+// ✅ Handle preflight
 app.options("*", cors());
 
+/**
+ * Security & parsing AFTER CORS
+ */
 app.use(helmet());
 app.use(express.json());
 app.use(morgan("dev"));
