@@ -1,9 +1,14 @@
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+import jwt, { SignOptions, Secret } from "jsonwebtoken";
 import { prisma } from "../../../config/prisma.js";
 import { Role } from "@prisma/client";
 
-const JWT_SECRET = process.env.JWT_ACCESS_SECRET!;
+// const JWT_SECRET = process.env.JWT_ACCESS_SECRET as string;
+// const JWT_EXPIRES_IN = process.env.JWT_ACCESS_EXPIRES_IN || "15m";
+const JWT_SECRET: Secret = process.env.JWT_ACCESS_SECRET as Secret;
+
+const JWT_EXPIRES_IN: SignOptions["expiresIn"] =
+  (process.env.JWT_ACCESS_EXPIRES_IN as SignOptions["expiresIn"]) || "15m";
 
 export async function registerUser(name: string, email: string, password: string, role: Role) {
   const existing = await prisma.user.findUnique({ where: { email } });
@@ -37,7 +42,7 @@ export async function loginUser(email: string, password: string) {
   }
 
   const token = jwt.sign({ userId: user.id, role: user.role }, JWT_SECRET, {
-    expiresIn: process.env.JWT_ACCESS_EXPIRES_IN,
+    expiresIn: JWT_EXPIRES_IN,
   });
 
   return { user, token };
