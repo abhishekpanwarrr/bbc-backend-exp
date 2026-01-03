@@ -1,6 +1,12 @@
 import { Request, Response } from "express";
 import { createCategorySchema, createMenuItemSchema } from "./menu.schema.js";
-import { getMenu, createCategory, createMenuItem } from "./menu.service.js";
+import {
+  getMenu,
+  createCategory,
+  createMenuItem,
+  getCategoryWithItems,
+  getFeaturedItems,
+} from "./menu.service.js";
 
 export async function fetchMenu(_req: Request, res: Response) {
   const menu = await getMenu();
@@ -9,7 +15,9 @@ export async function fetchMenu(_req: Request, res: Response) {
 
 export async function addCategory(req: Request, res: Response) {
   const body = createCategorySchema.parse(req.body);
-  const category = await createCategory(body.name, body.order);
+
+  const category = await createCategory(body.name, body.order, body?.imageUrl);
+
   res.status(201).json(category);
 }
 
@@ -17,4 +25,19 @@ export async function addMenuItem(req: Request, res: Response) {
   const body = createMenuItemSchema.parse(req.body);
   const item = await createMenuItem(body);
   res.status(201).json(item);
+}
+
+export async function fetchCategoryWithItem(req: Request, res: Response) {
+  const category = await getCategoryWithItems(req.params.id);
+
+  if (!category) {
+    return res.status(404).json({ message: "Category not found" });
+  }
+
+  res.json(category);
+}
+
+export async function fetchFeaturedItems(req: Request, res: Response) {
+  const items = await getFeaturedItems();
+  res.json(items);
 }

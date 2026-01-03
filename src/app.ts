@@ -1,3 +1,4 @@
+import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
@@ -6,6 +7,7 @@ import { authRouter } from "./api/v1/auth/auth.routes";
 import { menuRouter } from "./api/v1/menu/menu.routes";
 import { ordersRouter } from "./api/v1/orders/orders.routes";
 import { adminRouter } from "./api/v1/amdin/admin.routes";
+console.log("DATABASE_URL loaded:", !!process.env.DATABASE_URL);
 
 export const app = express();
 

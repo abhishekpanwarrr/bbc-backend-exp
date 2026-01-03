@@ -3,8 +3,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 enum Role {
@@ -58,6 +59,7 @@ enum OrderStatus {
 model MenuCategory {
   id        String     @id @default(uuid())
   name      String
+  imageUrl  String?
   order     Int        @default(0)
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
@@ -71,6 +73,7 @@ model MenuItem {
   description String?
   price       Int      // store in paise (₹ × 100)
   imageUrl    String?
+  isFeatured  Boolean  @default(false)
   isAvailable Boolean  @default(true)
   categoryId  String
   createdAt   DateTime @default(now())
