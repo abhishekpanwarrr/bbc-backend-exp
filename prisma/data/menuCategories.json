@@ -1,0 +1,38 @@
+[
+  {
+    "id": "0ebe2714-8436-404a-9d2d-da2639aa8698",
+    "name": "Burger",
+    "imageUrl": "https://res.cloudinary.com/dircbwq69/image/upload/v1767453578/menu/mnin8uusnh3gipt3rcac.png",
+    "order": 1
+  },
+  {
+    "id": "140693b7-1e41-4fc0-8bb1-f7a138b3da43",
+    "name": "Sandwich",
+    "imageUrl": "https://res.cloudinary.com/dircbwq69/image/upload/v1767453823/menu/ett3w83tiys0fraogrky.png",
+    "order": 1
+  },
+  {
+    "id": "14c3744f-fac5-4578-8f22-95217758a6ad",
+    "name": "Cold coffee",
+    "imageUrl": "https://res.cloudinary.com/dircbwq69/image/upload/v1767453935/menu/w308kl8shxtmxvc46tkp.png",
+    "order": 1
+  },
+  {
+    "id": "37b8ca4c-0749-48c3-a974-a0c0d022a83c",
+    "name": "Pasta",
+    "imageUrl": "https://res.cloudinary.com/dircbwq69/image/upload/v1767453945/menu/trpotnvvif6fzdjvaw3j.png",
+    "order": 1
+  },
+  {
+    "id": "3ec8b255-21f4-456f-abf2-2f871ee76761",
+    "name": "Mojito",
+    "imageUrl": "https://res.cloudinary.com/dircbwq69/image/upload/v1767465510/menu/ghzscljtcondu43eiykg.png",
+    "order": 1
+  },
+  {
+    "id": "e75f9074-edc2-49d3-bdd5-1a6243540e54",
+    "name": "Hot coffee",
+    "imageUrl": "https://res.cloudinary.com/dircbwq69/image/upload/v1767453924/menu/f4eboe9luqcox6uebgjp.png",
+    "order": 1
+  }
+]

@@ -2,6 +2,7 @@
   "name": "bbc-backend",
   "version": "1.0.0",
   "main": "index.js",
+
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
@@ -11,6 +12,11 @@
     "prisma:generate": "prisma generate",
     "lint": "eslint ."
   },
+
+  "prisma": {
+    "seed": "bun prisma/seed.ts"
+  },
+
   "dependencies": {
     "@prisma/client": "^5.9.1",
     "bcryptjs": "^2.4.3",
@@ -24,6 +30,7 @@
     "socket.io": "^4.7.5",
     "zod": "^4.3.4"
   },
+
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
     "@types/cors": "^2.8.17",
@@ -35,6 +42,7 @@
     "tsx": "^4.7.0",
     "typescript": "^5.3.3"
   },
+
   "keywords": [
     "backend",
     "express",

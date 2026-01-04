@@ -6,6 +6,7 @@ import {
   fetchMenu,
   fetchCategoryWithItem,
   fetchFeaturedItems,
+  getMenuItem,
 } from "./ menu.controller.js";
 
 export const menuRouter = Router();
@@ -17,3 +18,4 @@ menuRouter.get("/category/:id", fetchCategoryWithItem);
 // Admin only
 menuRouter.post("/categories", requireAuth, requireAdmin, addCategory);
 menuRouter.post("/items", requireAuth, requireAdmin, addMenuItem);
+menuRouter.get("/item/:id", getMenuItem);

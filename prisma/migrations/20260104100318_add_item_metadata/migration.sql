@@ -59,6 +59,12 @@ CREATE TABLE "MenuItem" (
     "description" TEXT,
     "price" INTEGER NOT NULL,
     "imageUrl" TEXT,
+    "calories" INTEGER,
+    "isVegan" BOOLEAN NOT NULL DEFAULT false,
+    "isSpicy" BOOLEAN NOT NULL DEFAULT false,
+    "caffeineMg" INTEGER,
+    "rating" DOUBLE PRECISION,
+    "reviewCount" INTEGER NOT NULL DEFAULT 0,
     "isFeatured" BOOLEAN NOT NULL DEFAULT false,
     "isAvailable" BOOLEAN NOT NULL DEFAULT true,
     "categoryId" TEXT NOT NULL,
@@ -66,6 +72,16 @@ CREATE TABLE "MenuItem" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "MenuItem_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "MenuVariant" (
+    "id" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "priceDiff" INTEGER NOT NULL,
+    "itemId" TEXT NOT NULL,
+
+    CONSTRAINT "MenuVariant_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -79,3 +95,6 @@ ALTER TABLE "OrderItem" ADD CONSTRAINT "OrderItem_orderId_fkey" FOREIGN KEY ("or
 
 -- AddForeignKey
 ALTER TABLE "MenuItem" ADD CONSTRAINT "MenuItem_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "MenuCategory"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "MenuVariant" ADD CONSTRAINT "MenuVariant_itemId_fkey" FOREIGN KEY ("itemId") REFERENCES "MenuItem"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -64,3 +64,23 @@ export async function getFeaturedItems() {
     },
   });
 }
+
+export async function getMenuItemById(id: string) {
+  const item = await prisma.menuItem.findUnique({
+    where: { id },
+    include: {
+      category: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
+    },
+  });
+
+  if (!item) {
+    throw new Error("Menu item not found");
+  }
+
+  return item;
+}

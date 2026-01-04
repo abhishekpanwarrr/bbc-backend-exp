@@ -71,14 +71,34 @@ model MenuItem {
   id          String   @id @default(uuid())
   name        String
   description String?
-  price       Int      // store in paise (₹ × 100)
+  price       Int
   imageUrl    String?
+
+  // NEW
+  calories    Int?
+  isVegan     Boolean  @default(false)
+  isSpicy     Boolean  @default(false)
+  caffeineMg  Int?
+  rating      Float?   // avg rating
+  reviewCount Int      @default(0)
+
   isFeatured  Boolean  @default(false)
   isAvailable Boolean  @default(true)
+
   categoryId  String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
   category    MenuCategory @relation(fields: [categoryId], references: [id])
+  variants    MenuVariant[]
 }
 
+
+model MenuVariant {
+  id         String @id @default(uuid())
+  name       String // Small / Medium / Large
+  priceDiff Int    // +₹20, +₹40
+  itemId    String
+
+  item MenuItem @relation(fields: [itemId], references: [id])
+}

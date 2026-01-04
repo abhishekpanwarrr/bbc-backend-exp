@@ -6,6 +6,7 @@ import {
   createMenuItem,
   getCategoryWithItems,
   getFeaturedItems,
+  getMenuItemById,
 } from "./menu.service.js";
 
 export async function fetchMenu(_req: Request, res: Response) {
@@ -40,4 +41,18 @@ export async function fetchCategoryWithItem(req: Request, res: Response) {
 export async function fetchFeaturedItems(req: Request, res: Response) {
   const items = await getFeaturedItems();
   res.json(items);
+}
+
+export async function getMenuItem(req: Request, res: Response) {
+  try {
+    const { id } = req.params;
+
+    const item = await getMenuItemById(id);
+
+    res.json(item);
+  } catch (error: any) {
+    res.status(404).json({
+      message: error.message || "Menu item not found",
+    });
+  }
 }
